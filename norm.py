@@ -33,10 +33,10 @@ def run(ctx):
         p300_mount = 'left'
     else:
         p300_mount = 'right'
-    source_plate = ctx.load_labware(src_plate, '1')
-    dest_plate = ctx.load_labware(dst_plate, '2')
+    source_plate = ctx.load_labware(src_plate, '1', "source")
+    dest_plate = ctx.load_labware(dst_plate, '2', "normalised")
     reagent_tubes = ctx.load_labware('opentrons_6_tuberack_'
-                                     'falcon_50ml_conical', '4')
+                                     'falcon_50ml_conical', '4', "diluent")
 
     # parse
     csv_1 = file_input.split('\n')
@@ -53,7 +53,10 @@ def run(ctx):
     transfer_vol = []
     nfw_vol = []
     for final, start, vol in zip(final_conc, start_conc, final_vol):
-        transfer_vol.append(round(vol * (final / start), 2))
+        if start <= 0:
+            transfer_vol.append(0)
+        else:
+            transfer_vol.append(round(vol * (final / start), 2))
     for s_vol, f_vol in zip(transfer_vol, final_vol):
         nfw_vol.append(f_vol - s_vol)
     lists = [well_list, final_vol,

@@ -39,7 +39,7 @@ Single-channel P300: Left side
 
 2. If needed, change pipettes to the configuration in 'OT2 Setup'
 
-3. Prepare csv file containing dilution information (following the format of norm_csv.csv)
+3. Prepare csv file containing dilution information (following the format of norm_csv.csv). The information for each well must be in the order of  A1-H1, A2-H2, A3-H3 etc.
 
 4. Get the IP address (wired or wireless) of the OT2 using the Opentrons app
 
@@ -52,6 +52,8 @@ Single-channel P300: Left side
 8. You can now run the protocol
 
 
+
+---
 
 
 
